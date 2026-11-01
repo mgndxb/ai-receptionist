@@ -68,6 +68,9 @@ vercel link && vercel env pull .env.local   # gives the dev server an AI Gateway
 npm run dev                                  # http://localhost:5182/ai-receptionist/
 ```
 
+Every push to `main` deploys twice: GitHub Actions checks and publishes the page to GitHub Pages, and Vercel deploys the
+function. The page calls the function across origins, and the function only answers this site.
+
 Stack: TypeScript, React 19, Vite, Tailwind CSS, AI SDK 7, Vercel Functions, Vercel AI Gateway, Vitest.
 
 Arc Brow & Lash, its stylists, prices and bookings are made up. Built by [Magnus Kaur](https://magnus.is-a.dev).

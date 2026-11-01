@@ -1,5 +1,5 @@
 # Builds the page and publishes it to GitHub Pages on every push to main.
-# The chat API itself deploys to Vercel (vercel deploy --prod).
+# The chat API deploys to Vercel from the same push, through Vercel's GitHub integration.
 # Nothing deploys unless typecheck, tests and the build all pass.
 name: Deploy to GitHub Pages
 
