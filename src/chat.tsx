@@ -16,7 +16,7 @@ export const GREETING: UIMessage = {
   ],
 };
 
-const STARTERS = ["Lash lift this Saturday?", "How much is brow lamination?", "¿Tenéis hueco para cejas mañana?"];
+const STARTERS = ["Lash lift this week?", "How much is brow lamination?", "¿Tenéis hueco para cejas mañana?"];
 
 const ACTIVITY: Record<string, string> = {
   get_services: "Checked the menu",
