@@ -2,5 +2,12 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
   "buildCommand": "vite build",
-  "functions": { "api/chat.ts": { "maxDuration": 60 } }
+  "functions": {
+    "api/chat.ts": {
+      "maxDuration": 60
+    }
+  },
+  "regions": [
+    "arn1"
+  ]
 }
