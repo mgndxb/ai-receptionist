@@ -62,7 +62,7 @@ function seeded(text: string) {
   };
 }
 
-const LUNCH: Record<Stylist, number> = { Iida: 780, Veera: 810 };
+const LUNCH: Record<Stylist, number> = { Mia: 780, Leah: 810 };
 
 /** The bookings other (made-up) customers already have on a given day. */
 export function bookedOn(date: string): Block[] {
@@ -140,7 +140,7 @@ export function findTimes(request: FindRequest, now: Date, extra: Block[] = []):
   const service = findService(request.serviceId);
   if (!service) return { ok: false, reason: `Unknown service "${request.serviceId}". Use an id from get_services.` };
   if (!service.bookable) {
-    return { ok: false, reason: `${service.name} can't be booked here. Iida books it after a free consultation, so offer the consultation (pmu-consult) instead.` };
+    return { ok: false, reason: `${service.name} can't be booked here. Mia books it after a free consultation, so offer the consultation (pmu-consult) instead.` };
   }
   if (!isDate(request.fromDate) || (request.toDate && !isDate(request.toDate))) return { ok: false, reason: "Dates must look like 2026-11-07." };
 
@@ -192,7 +192,7 @@ export function placeHold(request: HoldRequest, now: Date, active: Hold[], confi
   const service = findService(request.serviceId);
   if (!service) return { ok: false, reason: `Unknown service "${request.serviceId}".` };
   if (!service.bookable) {
-    return { ok: false, reason: `${service.name} needs a free consultation with Iida first. Offer to hold a consultation (pmu-consult) instead.` };
+    return { ok: false, reason: `${service.name} needs a free consultation with Mia first. Offer to hold a consultation (pmu-consult) instead.` };
   }
   if (!service.stylists.includes(request.stylist)) {
     return { ok: false, reason: `${request.stylist} doesn't do ${service.name}. It's done by ${service.stylists.join(" and ")}.` };

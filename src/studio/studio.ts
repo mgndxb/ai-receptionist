@@ -1,13 +1,12 @@
-// Studio Usva: a made-up brow and lash studio in Kallio, Helsinki.
+// Arc Brow & Lash: a made-up brow and lash studio.
 // This file is the single source of truth for what it sells and when it is open.
 // The AI never sees a price or an opening hour that doesn't come from here.
 
-export type Stylist = "Iida" | "Veera";
+export type Stylist = "Mia" | "Leah";
 
 export interface Service {
   id: string;
   name: string;
-  nameFi: string;
   /** Fits inside a calendar block. */
   short: string;
   minutes: number;
@@ -18,25 +17,25 @@ export interface Service {
   note?: string;
 }
 
-export const STYLISTS: Stylist[] = ["Iida", "Veera"];
+export const STYLISTS: Stylist[] = ["Mia", "Leah"];
 
 export const SERVICES: Service[] = [
-  { id: "brow-lamination", short: "Lamination", name: "Brow lamination", nameFi: "Kulmien laminointi", minutes: 45, euros: 59, stylists: ["Iida", "Veera"], bookable: true },
-  { id: "brow-shape-tint", short: "Shape & tint", name: "Brow shape & tint", nameFi: "Kulmien muotoilu ja värjäys", minutes: 30, euros: 35, stylists: ["Iida", "Veera"], bookable: true },
-  { id: "lash-lift", short: "Lash lift", name: "Lash lift & tint", nameFi: "Ripsien kestotaivutus ja värjäys", minutes: 60, euros: 65, stylists: ["Veera"], bookable: true },
-  { id: "lash-classic", short: "Extensions", name: "Classic lash extensions", nameFi: "Klassiset ripsienpidennykset", minutes: 120, euros: 95, stylists: ["Veera"], bookable: true },
-  { id: "lash-refill", short: "Refill", name: "Lash refill (within 3 weeks)", nameFi: "Ripsienpidennysten huolto (3 vk sisällä)", minutes: 75, euros: 55, stylists: ["Veera"], bookable: true },
-  { id: "pmu-consult", short: "Consult", name: "Powder brows consultation", nameFi: "Puuterikulmien konsultaatio", minutes: 20, euros: 0, stylists: ["Iida"], bookable: true, note: "Free. Needed before powder brows." },
+  { id: "brow-lamination", short: "Brow lam.", name: "Brow lamination", minutes: 45, euros: 59, stylists: ["Mia", "Leah"], bookable: true },
+  { id: "brow-shape-tint", short: "Shape & tint", name: "Brow shape & tint", minutes: 30, euros: 35, stylists: ["Mia", "Leah"], bookable: true },
+  { id: "lash-lift", short: "Lash lift", name: "Lash lift & tint", minutes: 60, euros: 65, stylists: ["Leah"], bookable: true },
+  { id: "lash-classic", short: "Extensions", name: "Classic lash extensions", minutes: 120, euros: 95, stylists: ["Leah"], bookable: true },
+  { id: "lash-refill", short: "Refill", name: "Lash refill (within 3 weeks)", minutes: 75, euros: 55, stylists: ["Leah"], bookable: true },
+  { id: "pmu-consult", short: "Consult", name: "Powder brows consultation", minutes: 20, euros: 0, stylists: ["Mia"], bookable: true, note: "Free. Needed before powder brows." },
   {
     id: "pmu-powder",
     short: "Powder brows",
     name: "Powder brows (permanent makeup)",
-    nameFi: "Puuterikulmat (pysyvä meikki)",
+   
     minutes: 150,
     euros: 320,
-    stylists: ["Iida"],
+    stylists: ["Mia"],
     bookable: false,
-    note: "Booked by Iida after a free consultation. Includes one touch-up within 8 weeks.",
+    note: "Booked by Mia after a free consultation. Includes one touch-up within 8 weeks.",
   },
 ];
 
@@ -52,10 +51,10 @@ export const HOURS: Record<number, { open: number; close: number } | null> = {
 };
 
 export const FACTS = [
-  "Studio Usva is a brow and lash studio in Kallio, Helsinki. It is made up for this demo.",
+  "Arc Brow & Lash is a brow and lash studio in Helsinki city centre. It is made up for this demo.",
   "Opening hours: Tuesday to Friday 10:00–18:00, Saturday 10:00–16:00, closed Sunday and Monday.",
-  "Stylists: Iida does brows and powder brows. Veera does lashes and brows.",
-  "Payment at the studio by card or MobilePay.",
+  "Stylists: Mia does brows and powder brows. Leah does lashes and brows.",
+  "Payment at the studio by card, Apple Pay or Google Pay.",
   "Cancellation is free up to 24 hours before. Later cancellations cost 50% of the price.",
   "Bookings open four weeks ahead.",
 ];

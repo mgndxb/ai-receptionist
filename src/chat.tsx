@@ -11,12 +11,12 @@ export const GREETING: UIMessage = {
   parts: [
     {
       type: "text",
-      text: "Hi! I'm Studio Usva's AI receptionist. I can tell you about treatments, find a free time and hold it for you.\nMoi! Voit kirjoittaa myös suomeksi.",
+      text: "Hi! I'm the AI receptionist at Arc Brow & Lash. I can tell you about our treatments, find a free time and hold it for you. Write in any language you like.",
     },
   ],
 };
 
-const STARTERS = ["Lash lift this Saturday?", "Paljonko kulmien laminointi maksaa?", "First free brow time?"];
+const STARTERS = ["Lash lift this Saturday?", "How much is brow lamination?", "¿Tenéis hueco para cejas mañana?"];
 
 const ACTIVITY: Record<string, string> = {
   get_services: "Checked the menu",
@@ -56,7 +56,7 @@ function BookingCard({ hold, decision, now, onDecide }: { hold: Hold; decision?:
   const ss = String(Math.floor((left % 60_000) / 1000)).padStart(2, "0");
 
   return (
-    <div className={`enter mr-8 overflow-hidden rounded-[20px] border bg-paper ${state === "held" ? "border-cherry/50" : "border-line"}`}>
+    <div className={`enter mr-2 overflow-hidden rounded-[20px] border bg-paper sm:mr-8 ${state === "held" ? "border-cherry/50" : "border-line"}`}>
       <div className="flex items-start justify-between gap-3 px-4 pt-3.5">
         <div>
           <p className="font-display text-[17px] leading-tight font-semibold tracking-[-0.01em]">{hold.service}</p>
@@ -69,13 +69,13 @@ function BookingCard({ hold, decision, now, onDecide }: { hold: Hold; decision?:
       <div className="mt-3 border-t border-line px-4 py-3">
         {state === "held" && (
           <div className="flex items-center gap-2">
-            <button type="button" onClick={() => onDecide(hold.id, "confirmed")} className="press h-9 flex-1 rounded-full bg-cherry px-4 text-[14px] font-medium text-white hover:bg-cherry/90">
+            <button type="button" onClick={() => onDecide(hold.id, "confirmed")} className="press h-9 flex-1 rounded-full bg-cherry px-3 text-[14px] font-medium whitespace-nowrap text-white hover:bg-cherry/90">
               Confirm booking
             </button>
-            <button type="button" onClick={() => onDecide(hold.id, "released")} className="press h-9 rounded-full border border-line px-4 text-[14px] text-ash hover:border-ink/30 hover:text-ink">
+            <button type="button" onClick={() => onDecide(hold.id, "released")} className="press h-9 rounded-full border border-line px-3 text-[14px] text-ash hover:border-ink/30 hover:text-ink">
               Release
             </button>
-            <span className="w-12 text-right font-mono text-[12px] text-cherry tabular-nums" aria-label="Time left on the hold">
+            <span className="w-10 text-right font-mono text-[12px] text-cherry tabular-nums" aria-label="Time left on the hold">
               {mm}:{ss}
             </span>
           </div>
@@ -170,13 +170,13 @@ export function ChatPanel({
   return (
     <section className="panel flex h-[min(720px,82dvh)] flex-col overflow-hidden" aria-label="Chat with the studio">
       <header className="flex items-center gap-3 border-b border-line px-4 py-3">
-        <div className="grid size-10 place-items-center rounded-full bg-ink" aria-hidden>
-          <svg viewBox="0 0 64 64" className="size-6">
-            <path d="M20 18v17a12 12 0 0 0 24 0V18" fill="none" stroke="#cf2458" strokeWidth="7" strokeLinecap="round" />
-          </svg>
+        <div className="grid size-10 place-items-center rounded-full bg-ink font-display text-[14px] font-bold tracking-[-0.03em] text-white" aria-hidden>
+          <span>
+            arc<span className="text-cherry">.</span>
+          </span>
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-[15px] leading-tight font-semibold">Studio Usva</p>
+          <p className="text-[15px] leading-tight font-semibold">Arc Brow &amp; Lash</p>
           <p className="text-[12.5px] text-ash">AI receptionist, answers in seconds</p>
         </div>
         <button type="button" onClick={onReset} disabled={busy || messages.length < 2} className="press rounded-full border border-line px-3 py-1.5 text-[12.5px] text-ash hover:text-ink disabled:opacity-40">
@@ -225,7 +225,7 @@ export function ChatPanel({
           onChange={(e) => setInput(e.target.value)}
           maxLength={600}
           autoComplete="off"
-          placeholder="Message Studio Usva…"
+          placeholder="Message Arc Brow & Lash…"
           className="h-11 min-w-0 flex-1 rounded-full border border-line bg-mist/50 px-4 text-[15px] outline-none placeholder:text-faint focus:border-ink/30 focus:bg-paper"
         />
         <button type="submit" disabled={busy || !input.trim()} className="press grid size-11 place-items-center rounded-full bg-ink text-white disabled:opacity-30" aria-label="Send">

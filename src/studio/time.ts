@@ -54,14 +54,15 @@ export function parseStart(value: string): LocalNow | null {
 }
 
 const EN_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const FI_DAYS = ["sunnuntai", "maanantai", "tiistai", "keskiviikko", "torstai", "perjantai", "lauantai"];
 
-export function dayName(date: string, lang: "en" | "fi" = "en"): string {
-  return (lang === "fi" ? FI_DAYS : EN_DAYS)[weekday(date)]!;
+export function dayName(date: string): string {
+  return EN_DAYS[weekday(date)]!;
 }
 
-/** "Sat 7.11." in the UI, like Finnish calendars write it. */
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+/** "Sat 7 Nov" in the UI. */
 export function shortDay(date: string): string {
   const [, m, d] = date.split("-").map(Number);
-  return `${EN_DAYS[weekday(date)]!.slice(0, 3)} ${d}.${m}.`;
+  return `${EN_DAYS[weekday(date)]!.slice(0, 3)} ${d} ${MONTHS[m! - 1]}`;
 }

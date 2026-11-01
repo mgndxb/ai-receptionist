@@ -68,14 +68,14 @@ export function App() {
       </header>
 
       <section className="mx-auto max-w-[1360px] px-4 pt-12 pb-10 md:px-8 md:pt-16">
-        <h1 className="max-w-[16ch] font-display text-[clamp(2.4rem,6.2vw,5.2rem)] leading-[0.95] font-extrabold tracking-[-0.032em]">
+        <h1 className="max-w-[18ch] font-display text-[clamp(2.4rem,6.2vw,5.2rem)] leading-[0.95] font-extrabold tracking-[-0.032em]">
           Book a lash lift. Then try to talk it into a discount.
         </h1>
         <p className="mt-6 max-w-[64ch] text-[16.5px] leading-relaxed text-ink/75">
           Beauty studios get the same messages all day, often while the stylist's hands are busy with a client. This is an AI
-          receptionist for a made-up studio in Helsinki. It answers in Finnish or English, looks up real free times and holds one
-          for you. The rules that matter live in code, not in the prompt, so it can't invent a price, double-book a chair or
-          confirm a booking on its own.
+          receptionist for a made-up brow and lash studio. It replies in whatever language you write in, looks up real free
+          times and holds one for you. The rules that matter live in code, not in the prompt, so it can't invent a price,
+          double-book a chair or confirm a booking on its own.
         </p>
       </section>
 
@@ -120,7 +120,7 @@ export function App() {
             the project's own short-lived token, under a monthly budget cap.
           </p>
           <p>
-            <strong className="text-ink">Built by Magnus Kaur</strong> with TypeScript, React, Vite and the AI SDK. Studio Usva, its
+            <strong className="text-ink">Built by Magnus Kaur</strong> with TypeScript, React, Vite and the AI SDK. Arc Brow &amp; Lash, its
             stylists, prices and bookings are all made up.
           </p>
         </div>

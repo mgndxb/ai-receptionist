@@ -54,7 +54,7 @@ describe("calendar", () => {
       const start = parseStart(option.start)!;
       expect(weekday(start.date)).not.toBe(0);
       expect(weekday(start.date)).not.toBe(1);
-      expect(option.stylist).toBe("Veera");
+      expect(option.stylist).toBe("Leah");
       if (start.date === "2026-11-06") expect(start.minutes).toBeGreaterThanOrEqual(11 * 60);
       const clash = bookedOn(start.date).some((b) => b.stylist === option.stylist && b.start < start.minutes + 60 && start.minutes < b.end);
       expect(clash).toBe(false);
@@ -71,19 +71,19 @@ describe("holds", () => {
   it("holds a free time and prices it from the menu", () => {
     const option = freeStart();
     const result = placeHold({ serviceId: "lash-lift", start: option.start, stylist: option.stylist, customerName: " Anna " }, NOW, [], new Set(), ids());
-    expect(result).toMatchObject({ ok: true, hold: { id: "H-0001", euros: 65, customer: "Anna", stylist: "Veera" } });
+    expect(result).toMatchObject({ ok: true, hold: { id: "H-0001", euros: 65, customer: "Anna", stylist: "Leah" } });
   });
 
   it("refuses closed days, closed hours, the past and the wrong stylist", () => {
     const make = ids();
-    const attempt = (start: string, stylist: "Iida" | "Veera" = "Veera", serviceId = "lash-lift") =>
+    const attempt = (start: string, stylist: "Mia" | "Leah" = "Leah", serviceId = "lash-lift") =>
       placeHold({ serviceId, start, stylist, customerName: "Anna" }, NOW, [], new Set(), make);
     expect(attempt("2026-11-08T12:00")).toMatchObject({ ok: false, reason: expect.stringContaining("closed on Sundays") });
     expect(attempt("2026-11-07T09:00")).toMatchObject({ ok: false, reason: expect.stringContaining("10:00–16:00") });
     expect(attempt("2026-11-07T15:30")).toMatchObject({ ok: false, reason: expect.stringContaining("between 10:00 and 15:00") });
     expect(attempt("2026-11-06T10:00")).toMatchObject({ ok: false, reason: expect.stringContaining("passed") });
-    expect(attempt("2026-11-07T12:00", "Iida")).toMatchObject({ ok: false, reason: expect.stringContaining("doesn't do") });
-    expect(attempt("2026-11-07T12:00", "Iida", "pmu-powder")).toMatchObject({ ok: false, reason: expect.stringContaining("consultation") });
+    expect(attempt("2026-11-07T12:00", "Mia")).toMatchObject({ ok: false, reason: expect.stringContaining("doesn't do") });
+    expect(attempt("2026-11-07T12:00", "Mia", "pmu-powder")).toMatchObject({ ok: false, reason: expect.stringContaining("consultation") });
     expect(attempt("2026-11-07T12:10")).toMatchObject({ ok: false, reason: expect.stringContaining("quarter hour") });
   });
 
@@ -95,20 +95,20 @@ describe("holds", () => {
     const again = placeHold({ serviceId: "lash-lift", start: option.start, stylist: option.stylist, customerName: "Ben" }, NOW, [first.hold], new Set(), make);
     expect(again).toMatchObject({ ok: false, reason: expect.stringContaining("already booked") });
 
-    const taken = bookedOn("2026-11-07").find((b) => b.stylist === "Veera" && b.kind === "booked")!;
-    const clash = placeHold({ serviceId: "brow-shape-tint", start: `2026-11-07T${String(taken.start / 60 | 0).padStart(2, "0")}:${String(taken.start % 60).padStart(2, "0")}`, stylist: "Veera", customerName: "Ben" }, NOW, [], new Set(), make);
+    const taken = bookedOn("2026-11-07").find((b) => b.stylist === "Leah" && b.kind === "booked")!;
+    const clash = placeHold({ serviceId: "brow-shape-tint", start: `2026-11-07T${String(taken.start / 60 | 0).padStart(2, "0")}:${String(taken.start % 60).padStart(2, "0")}`, stylist: "Leah", customerName: "Ben" }, NOW, [], new Set(), make);
     expect(clash.ok).toBe(false);
   });
 
   it("caps open holds per chat", () => {
-    const fake = (id: string): Hold => ({ id, serviceId: "lash-lift", service: "Lash lift", date: "2026-11-20", start: 600, end: 660, stylist: "Veera", euros: 65, customer: "A", expiresAt: "2099-01-01T00:00:00Z" });
+    const fake = (id: string): Hold => ({ id, serviceId: "lash-lift", service: "Lash lift", date: "2026-11-20", start: 600, end: 660, stylist: "Leah", euros: 65, customer: "A", expiresAt: "2099-01-01T00:00:00Z" });
     const option = freeStart("brow-shape-tint");
     const result = placeHold({ serviceId: "brow-shape-tint", start: option.start, stylist: option.stylist, customerName: "Anna" }, NOW, [fake("H-A"), fake("H-B")], new Set(), ids());
     expect(result).toMatchObject({ ok: false, reason: expect.stringContaining("Release one") });
   });
 
   it("reads holds back from the chat, minus released and expired ones", () => {
-    const hold = (id: string, expiresAt: string): Hold => ({ id, serviceId: "lash-lift", service: "Lash lift", date: "2026-11-20", start: 600, end: 660, stylist: "Veera", euros: 65, customer: "A", expiresAt });
+    const hold = (id: string, expiresAt: string): Hold => ({ id, serviceId: "lash-lift", service: "Lash lift", date: "2026-11-20", start: 600, end: 660, stylist: "Leah", euros: 65, customer: "A", expiresAt });
     const messages = [
       { role: "user", parts: [{ type: "text" }] },
       {

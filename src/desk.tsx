@@ -23,7 +23,7 @@ function BlockView({ block, label }: { block: Block; label: string }) {
       style={{ top: y(block.start) + 1, height }}
       title={`${label}, ${clock(block.start)}–${clock(block.end)}`}
     >
-      {height >= 14 && <span className={height >= 34 ? "line-clamp-2" : "block truncate"}>{label}</span>}
+      {height >= 14 && <span className={height >= 34 ? "line-clamp-2 hyphens-auto" : "block truncate"}>{label}</span>}
     </div>
   );
 }

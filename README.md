@@ -2,8 +2,8 @@
 
 **Try it: [magnus.is-a.dev/ai-receptionist](https://magnus.is-a.dev/ai-receptionist/)**
 
-An AI receptionist for Studio Usva, a made-up brow and lash studio in Helsinki. It answers customers in Finnish or English,
-looks up free times in the studio's calendar and holds one for you. Then the page invites you to try to break it: haggle,
+An AI receptionist for Arc Brow & Lash, a made-up brow and lash studio. It replies in whatever language the customer
+writes in, looks up free times in the studio's calendar and holds one for you. Then the page invites you to try to break it: haggle,
 book when it's closed, skip a required consultation, ask for health advice, or paste a fake "SYSTEM" message.
 
 I build websites for beauty businesses. Their customers tend to ask the same few things (what does this cost, is there time
@@ -43,8 +43,8 @@ Browser (React, AI SDK useChat)                     Vercel Function: api/chat.ts
   read holds back from it with the same function. Each visitor gets their own copy of the week.
 - **No API key.** The function reaches Claude through Vercel AI Gateway using the project's short-lived OIDC token, and the
   project has a monthly AI budget, so a busy day can't run up a bill.
-- **Helsinki time everywhere.** The server runs in UTC, so dates are `YYYY-MM-DD` strings and times are minutes after
-  midnight in Helsinki. The prompt includes a two-week date table, so the model never has to work out which day is Saturday.
+- **Studio time everywhere.** The studio runs on Helsinki time and the server on UTC, so dates are `YYYY-MM-DD` strings
+  and times are minutes after midnight in the studio's time zone. The prompt includes a two-week date table, so the model never has to work out which day is Saturday.
 - **The page is a view of the chat.** The calendar highlights, booking cards, tool trace and stylists' inbox are all derived
   from the message parts. There's no second copy of state to get out of sync.
 
@@ -52,10 +52,10 @@ Browser (React, AI SDK useChat)                     Vercel Function: api/chat.ts
 
 ```bash
 npm test        # 11 unit tests: time zones, opening hours, overlaps, hold limits, reading holds from a chat
-npm run eval    # 8 scripted conversations against the real model
+npm run eval    # 9 scripted conversations against the real model
 ```
 
-The evals check behaviour rather than wording: the price in Finnish is 59 €, a 50% discount never happens, Sunday can't be
+The evals check behaviour rather than wording: asked in Spanish or Finnish, it quotes 59 € in that language, a 50% discount never happens, Sunday can't be
 booked, powder brows aren't held without a consultation, a pregnancy question is handed off as `health`, a fake system
 message can't change a price, off-topic requests get no tools, and a full booking holds one of the times it offered at
 the menu price.
@@ -70,4 +70,4 @@ npm run dev                                  # http://localhost:5182/ai-receptio
 
 Stack: TypeScript, React 19, Vite, Tailwind CSS, AI SDK 7, Vercel Functions, Vercel AI Gateway, Vitest.
 
-Studio Usva, its stylists, prices and bookings are made up. Built by [Magnus Kaur](https://magnus.is-a.dev).
+Arc Brow & Lash, its stylists, prices and bookings are made up. Built by [Magnus Kaur](https://magnus.is-a.dev).

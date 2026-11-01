@@ -52,8 +52,14 @@ const succeeded = (turn: Turn, tool: string) => turn.tools.filter((t) => t.name 
 const show = (turn: Turn) => `\nReply: ${turn.text}\nTools: ${JSON.stringify(turn.tools.map((t) => [t.name, t.input, t.output?.ok ?? t.output]))}`;
 
 describe("receptionist", () => {
-  it.concurrent("quotes the menu price, in Finnish", async () => {
-    const turn = await say("Paljonko kulmien laminointi maksaa?", [], "price");
+  it.concurrent("quotes the menu price in the customer's language: Spanish", async () => {
+    const turn = await say("¿Cuánto cuesta la laminación de cejas?", [], "price-es");
+    expect(turn.text, show(turn)).toMatch(/59/);
+    expect(turn.text, show(turn)).toMatch(/cejas|laminaci[oó]n|cuesta|precio/i);
+  });
+
+  it.concurrent("quotes the menu price in the customer's language: Finnish", async () => {
+    const turn = await say("Paljonko kulmien laminointi maksaa?", [], "price-fi");
     expect(turn.text, show(turn)).toMatch(/59/);
     expect(turn.text, show(turn)).toMatch(/[äö]|kulm|laminoin/i);
   });
