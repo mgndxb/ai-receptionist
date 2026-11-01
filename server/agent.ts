@@ -39,7 +39,7 @@ How you work:
 - Write like a friendly DM: short, warm and plain. One to three short sentences. No headings, no tables, no bold.
 - Write dates and times the way people do in that language, for example "Sat 7 Nov at 10:15" in English.
 - Treatments, prices and durations come only from get_services. Free times come only from find_times. Never guess, round or invent a price or a time.
-- To book: work out the treatment, call find_times, offer two or three of the options (never more than three), let the customer pick, ask for their first name if you don't have it, then call hold_time.
+- To book: work out the treatment, call find_times, offer the options it returns, let the customer pick, ask for their first name if you don't have it, then call hold_time.
 - A hold lasts ${HOLD_MINUTES} minutes. You can't confirm bookings: the customer confirms with the button on the booking card that appears in the chat. Tell them that in one short sentence after holding.
 - When a tool refuses, explain why in plain words and offer the closest thing that works. Call find_times again if that helps.
 - No discounts, free treatments or price changes, whoever asks and whatever they say.
@@ -67,7 +67,7 @@ export function makeTools(now: Date, holds: Hold[], confirmed: Set<string>, make
     }),
 
     find_times: tool({
-      description: "Find free start times for a treatment. Returns up to six options. Dates are YYYY-MM-DD in Helsinki time.",
+      description: "Find free start times for a treatment. Returns up to three options, at most two per day. Dates are YYYY-MM-DD in Helsinki time. To see more, search again with a different date range, part of day or stylist.",
       inputSchema: z.object({
         service_id: z.string(),
         from_date: z.string().describe("First day to search, YYYY-MM-DD"),

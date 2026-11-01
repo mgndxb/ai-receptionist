@@ -40,9 +40,11 @@ body {
   background: var(--color-blush);
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-cherry);
-  outline-offset: 2px;
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-cherry);
+    outline-offset: 2px;
+  }
 }
 
 @layer components {

@@ -226,7 +226,7 @@ export function ChatPanel({
           maxLength={600}
           autoComplete="off"
           placeholder="Message Arc Brow & Lash…"
-          className="h-11 min-w-0 flex-1 rounded-full border border-line bg-mist/50 px-4 text-[15px] outline-none placeholder:text-faint focus:border-ink/30 focus:bg-paper"
+          className="h-11 min-w-0 flex-1 rounded-full border border-line bg-mist/50 px-4 text-[15px] outline-none placeholder:text-faint focus:border-cherry/50 focus:bg-paper focus:ring-3 focus:ring-cherry/10"
         />
         <button type="submit" disabled={busy || !input.trim()} className="press grid size-11 place-items-center rounded-full bg-ink text-white disabled:opacity-30" aria-label="Send">
           <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>

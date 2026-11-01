@@ -48,6 +48,9 @@ export interface TimeOption {
 
 export type Refusal = { ok: false; reason: string };
 
+/** A DM should offer a few times, not a timetable. */
+const MAX_OPTIONS = 3;
+
 // Small seeded PRNG, so every visitor sees the same believable week.
 function seeded(text: string) {
   let h = 2166136261;
@@ -159,12 +162,12 @@ export function findTimes(request: FindRequest, now: Date, extra: Block[] = []):
   }
 
   const options: TimeOption[] = [];
-  for (let date = from; date <= to && options.length < 6; date = addDays(date, 1)) {
+  for (let date = from; date <= to && options.length < MAX_OPTIONS; date = addDays(date, 1)) {
     const hours = HOURS[weekday(date)];
     if (!hours) continue;
     let perDay = 0;
     let lastPicked = -Infinity;
-    for (let start = hours.open; start + service.minutes <= hours.close && perDay < 2 && options.length < 6; start += SLOT_STEP) {
+    for (let start = hours.open; start + service.minutes <= hours.close && perDay < 2 && options.length < MAX_OPTIONS; start += SLOT_STEP) {
       if (date === today.date && start < today.minutes + LEAD_MINUTES) continue;
       if (request.partOfDay === "morning" && start >= 720) continue;
       if (request.partOfDay === "afternoon" && start < 720) continue;
