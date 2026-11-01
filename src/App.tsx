@@ -7,6 +7,8 @@ import { handoffsFrom, latestOptions, traceFrom } from "./derive";
 import { Calendar, Inbox, Rules, Trace, Tricks } from "./desk";
 import { holdsFrom, openDays, type Decisions } from "./studio/calendar";
 import { helsinkiNow } from "./studio/time";
+import { SoundEffects, SoundToggle } from "./sound";
+import { sound } from "./sound-engine";
 
 // On GitHub Pages the API lives on Vercel; on Vercel and in development it's same-origin.
 const API = import.meta.env.VITE_API_URL ?? "/api/chat";
@@ -29,6 +31,19 @@ export function App() {
   useEffect(() => {
     if (import.meta.env.DEV) Object.assign(window, { __chat: { setMessages, setDecisions } });
   }, [setMessages]);
+
+  // A note for each tool result as it lands: held, refused or handed to a person.
+  const trace = traceFrom(messages);
+  const heard = useRef(new Set<string>());
+  useEffect(() => {
+    for (const item of trace) {
+      if (item.status === "running" || heard.current.has(item.id)) continue;
+      heard.current.add(item.id);
+      if (item.status === "refused" || item.status === "error") sound.refuse();
+      else if (item.tool === "hold_time") sound.success();
+      else if (item.tool === "hand_off") sound.pop(true);
+    }
+  }, [trace]);
 
   const busy = status === "submitted" || status === "streaming";
   const local = helsinkiNow(new Date(now));
@@ -55,9 +70,11 @@ export function App() {
 
   return (
     <div className="min-h-dvh">
+      <SoundEffects />
       <header className="mx-auto flex max-w-[1360px] items-center justify-between gap-4 px-4 pt-6 md:px-8">
         <p className="font-display text-[16px] font-semibold tracking-[-0.02em]">AI Receptionist</p>
         <nav className="flex gap-2 text-[13px]">
+          <SoundToggle className="press rounded-full border border-line bg-paper px-3.5 py-1.5 font-mono text-[12px] text-ash hover:text-ink" bar="bg-ink" />
           <a href="https://github.com/mgndxb/ai-receptionist" className="press rounded-full border border-line bg-paper px-3.5 py-1.5 text-ash hover:text-ink">
             Source
           </a>
@@ -88,7 +105,11 @@ export function App() {
             decisions={decisions}
             now={now}
             onSend={send}
-            onDecide={(id, decision) => setDecisions((current) => ({ ...current, [id]: decision }))}
+            onDecide={(id, decision) => {
+              if (decision === "confirmed") sound.confirm();
+              else sound.pop(false);
+              setDecisions((current) => ({ ...current, [id]: decision }));
+            }}
             onRetry={() => {
               clearError();
               void regenerate();
@@ -99,7 +120,7 @@ export function App() {
         <div className="min-w-0 space-y-5">
           <Calendar today={local.date} nowMinutes={local.minutes} days={days} holds={holds} confirmed={confirmed} found={found} />
           <div className="grid items-start gap-5 xl:grid-cols-2">
-            <Trace items={traceFrom(messages)} />
+            <Trace items={trace} />
             <div className="space-y-5">
               <Tricks disabled={busy} onTry={send} />
               <Inbox handoffs={handoffsFrom(messages)} />

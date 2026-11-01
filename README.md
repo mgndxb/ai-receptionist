@@ -74,3 +74,5 @@ function. The page calls the function across origins, and the function only answ
 Stack: TypeScript, React 19, Vite, Tailwind CSS, AI SDK 7, Vercel Functions, Vercel AI Gateway, Vitest.
 
 Arc Brow & Lash, its stylists, prices and bookings are made up. Built by [Magnus Kaur](https://magnus.is-a.dev).
+
+**Sound:** the same generative ambient music as [magnus.is-a.dev](https://magnus.is-a.dev), synthesised with the Web Audio API (no audio files). The portfolio and its Lab projects share one origin, so the on/off choice follows you between them.
