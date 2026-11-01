@@ -2,6 +2,8 @@
 
 **Try it: [magnus.is-a.dev/ai-receptionist](https://magnus.is-a.dev/ai-receptionist/)**
 
+[![AI Receptionist: the AI offers three free lash lift times while the studio calendar highlights them and the tool trace shows each call](docs/preview.webp)](https://magnus.is-a.dev/ai-receptionist/)
+
 An AI receptionist for Arc Brow & Lash, a made-up brow and lash studio. It replies in whatever language the customer
 writes in, looks up free times in the studio's calendar and holds one for you. Then the page invites you to try to break it: haggle,
 book when it's closed, skip a required consultation, ask for health advice, or paste a fake "SYSTEM" message.
