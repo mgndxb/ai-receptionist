@@ -53,7 +53,7 @@ Browser (React, AI SDK useChat)                     Vercel Function: api/chat.ts
 ## Tests and evals
 
 ```bash
-npm test        # 11 unit tests: time zones, opening hours, overlaps, hold limits, reading holds from a chat
+npm test        # 17 unit tests: time zones, opening hours, overlaps, hold limits, reading holds from a chat, visit pings
 npm run eval    # 9 scripted conversations against the real model
 ```
 
@@ -72,6 +72,9 @@ npm run dev                                  # http://localhost:5182/ai-receptio
 
 Every push to `main` deploys twice: GitHub Actions checks and publishes the page to GitHub Pages, and Vercel deploys the
 function. The page calls the function across origins, and the function only answers this site.
+
+The same Vercel project also hosts `api/visit.ts`, which the portfolio calls to send a phone notification (through
+ntfy.sh, to the topic in `NTFY_TOPIC`) when someone visits or downloads the CV. It stores nothing.
 
 Stack: TypeScript, React 19, Vite, Tailwind CSS, AI SDK 7, Vercel Functions, Vercel AI Gateway, Vitest.
 
